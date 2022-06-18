@@ -2,16 +2,21 @@ from datetime import date
 import requests
 import os
 
-def download(url, directory):
+def download(url: str, directory: str) -> None:
+    """Função que faz o download de um arquivo.
+
+    Args:
+        url (str): url do arquivo que vai ser baixado
+        directory (str): pasta onde o arquivo será salvo.
+    """
 
     file = requests.get(url)
     if file.status_code == requests.codes.OK:
         with open(directory, 'wb') as new_file:
             new_file.write(file.content)
-        print('Download do arquivo realizado com sucesso.')
+        print(f'[OK] Download do arquivo realizado com sucesso. Salvo em {directory}')
     else:
-        print('Este arquivo não existe')
-        print(file.raise_for_status())
+        print(f'[ERRO] URL {url} não existe')
 
 
 if __name__ == "__main__":
