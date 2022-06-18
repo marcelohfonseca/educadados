@@ -1,6 +1,7 @@
 from datetime import date
 import requests
 import os
+import json
 
 def download(url: str, directory: str) -> None:
     """Função que faz o download de um arquivo.
@@ -20,12 +21,22 @@ def download(url: str, directory: str) -> None:
 
 
 if __name__ == "__main__":
-    URL = 'https://download.inep.gov.br/microdados/microdados_censo_da_educacao_superior_{}.zip'
-    FOLDER = '../data'
+    
+    # importar json com lista de links
+    with open('../download_list.json') as json_file:
+        url_dict = json.load(json_file)['links']
+    
+    for name, link in url_dict.items():
+        folder = '../data/' + name
+        url = link['url']
+        file_name = link['filename']
+        
+        last_year = date.today().year
+        first_year = last_year - 10        
 
-    last_year = date.today().year
-    first_year = last_year - 10
-
-    for year in range(first_year, last_year):
-        file_name = os.path.join(FOLDER, f'microdados_censo_da_educacao_superior_{year}.zip')
-        download(URL.format(year), file_name)
+        for year in range(first_year, last_year):
+            # cria a pasta caso ela não exista
+            os.mkdir(folder) if not os.path.exists(folder) else None
+            
+            directory = os.path.join(folder, f'{file_name}_{year}.zip')
+            download(url.format(year), directory)
