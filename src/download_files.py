@@ -1,7 +1,9 @@
-from datetime import date
-import requests
-import os
 import json
+import os
+from datetime import date
+
+import requests
+
 
 def download(url: str, directory: str) -> None:
     """Função que faz o download de um arquivo.

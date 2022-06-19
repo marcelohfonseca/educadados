@@ -1,6 +1,7 @@
-import pandas as pd
 import os
 import zipfile as zip
+
+import pandas as pd
 
 folder = '../data/censo-educacao-superior/'
 
