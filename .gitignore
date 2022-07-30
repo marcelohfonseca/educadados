@@ -1,3 +1,11 @@
+# ambiente virtual python
 .venv
+
+# arquivos baixados
 data/*
+
+# testes
 .ipynb_checkpoints
+
+# variável do mysql
+.env
