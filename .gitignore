@@ -1,6 +1,9 @@
 # ambiente virtual python
 .venv
 
+# configurações do vscode
+.vscode
+
 # arquivos baixados
 data/*
 
